@@ -1,34 +1,85 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Config } from "./components/configuracoes";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Config />
+
+      <Tabs defaultValue="">
+        <TabsList className="w-full">
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="0"
+          >
+            0
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="1"
+          >
+            1
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="2"
+          >
+            2
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="3"
+          >
+            3
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="4"
+          >
+            4
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="5"
+          >
+            5
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="6"
+          >
+            6
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="7"
+          >
+            7
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="8"
+          >
+            8
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex items-baseline text-sm tracking-wider text-gray-950 before:text-sm before:text-gray-300 xs:text-lg sm:text-xl sm:before:content-['XX'] md:before:content-['XXXX'] lg:before:text-base"
+            value="9"
+          >
+            9
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="0">Pedidos terminados em 0</TabsContent>
+        <TabsContent value="1">Pedidos terminados em 1</TabsContent>
+        <TabsContent value="2">Pedidos terminados em 2</TabsContent>
+        <TabsContent value="3">Pedidos terminados em 3</TabsContent>
+        <TabsContent value="4">Pedidos terminados em 4</TabsContent>
+        <TabsContent value="5">Pedidos terminados em 5</TabsContent>
+        <TabsContent value="6">Pedidos terminados em 6</TabsContent>
+        <TabsContent value="7">Pedidos terminados em 7</TabsContent>
+        <TabsContent value="8">Pedidos terminados em 8</TabsContent>
+        <TabsContent value="9">Pedidos terminados em 9</TabsContent>
+      </Tabs>
     </>
   );
 }
