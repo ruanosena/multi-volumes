@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -25,6 +25,7 @@ export function Config() {
     updateTransportadora,
     removeTransportadora,
     transportadoras,
+    updateConfig,
   } = useConfiguracoes();
   const [adicionandoTransportadora, setAdicionandoTransportadora] =
     useState(false);
@@ -32,25 +33,27 @@ export function Config() {
     useState<Transportadora>();
 
   const handleToggleTransportadora = useCallback(
-    (t: Transportadora) => {
-      if (transportadoraEditando === t) {
+    (transportadora?: Transportadora) => {
+      if (transportadora && transportadoraEditando === transportadora) {
         setTransportadoraEditando(undefined);
         setAdicionandoTransportadora(false);
       } else {
-        setTransportadoraEditando(t);
-        setAdicionandoTransportadora(true);
+        setTransportadoraEditando(transportadora);
+        setAdicionandoTransportadora((prevState) =>
+          prevState && !transportadora ? false : !transportadora,
+        );
       }
     },
     [transportadoraEditando],
   );
 
   const handleChangeTransportadora = useCallback(
-    (t?: Transportadora) => {
+    (transportadora?: Transportadora) => {
       if (transportadoraEditando) {
-        if (!t) removeTransportadora(transportadoraEditando);
-        else updateTransportadora(transportadoraEditando, t);
+        if (!transportadora) removeTransportadora(transportadoraEditando);
+        else updateTransportadora(transportadoraEditando, transportadora);
       } else {
-        addTransportadora(t!);
+        addTransportadora(transportadora!);
       }
       setAdicionandoTransportadora(false);
     },
@@ -77,15 +80,17 @@ export function Config() {
         <div className="flex items-baseline justify-between bg-gray-100">
           <span className="pl-2 font-medium">Transportadoras</span>
           <Button
-            onClick={() => {
-              setAdicionandoTransportadora(true);
-              setTransportadoraEditando(undefined);
-            }}
+            onClick={() => handleToggleTransportadora()}
             variant="outline"
             size="icon"
             className="bg-white/75 hover:bg-white"
           >
-            <Plus />
+            {adicionandoTransportadora &&
+            transportadoraEditando === undefined ? (
+              <Minus />
+            ) : (
+              <Plus />
+            )}
           </Button>
         </div>
         <div className="flex flex-wrap -space-x-1">
@@ -99,7 +104,7 @@ export function Config() {
             </Avatar>
           ))}
         </div>
-        {adicionandoTransportadora && (
+        {(adicionandoTransportadora || transportadoraEditando) && (
           <TransportadoraForm
             transportadoraAtiva={transportadoraEditando}
             onChange={handleChangeTransportadora}
@@ -115,6 +120,7 @@ export function Config() {
               onClick={() => {
                 setDialogoAberto(false);
                 setAdicionandoTransportadora(false);
+                updateConfig();
               }}
             >
               Concluir

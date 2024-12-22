@@ -20,6 +20,7 @@ type ConfiguracoesContextType = {
   jaFoiConfigurado: boolean;
   dialogoAberto: boolean;
   setDialogoAberto: (aberto: boolean) => void;
+  updateConfig: (key?: keyof Config, value?: Config[keyof Config]) => void;
 };
 
 const ConfiguracoesContext = createContext<ConfiguracoesContextType>(
@@ -51,7 +52,7 @@ export function ConfiguracoesContextProvider({
   const [dialogoAberto, setDialogoAberto] = useState(!jaFoiConfigurado);
 
   const updateConfig = useCallback(
-    (key: keyof Config, value: Config[keyof Config]) => {
+    (key?: keyof Config, value?: Config[keyof Config]) => {
       let config: Config = {};
       try {
         const data = localStorage.getItem(storageKey);
@@ -59,7 +60,9 @@ export function ConfiguracoesContextProvider({
       } catch {
         /* empty */
       } finally {
-        config[key] = value;
+        if (key != undefined && value != undefined) {
+          config[key] = value;
+        }
         localStorage.setItem(storageKey, JSON.stringify(config));
         setJaFoiConfigurado(true);
       }
@@ -112,6 +115,7 @@ export function ConfiguracoesContextProvider({
         jaFoiConfigurado,
         dialogoAberto,
         setDialogoAberto,
+        updateConfig,
       }}
     >
       {children}
